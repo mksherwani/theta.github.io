@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Theta Solutions - About Us</title>
     
-    <!-- Link to Master CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -31,98 +30,107 @@
         </div>
     </header>
 
-    <!-- MAIN CONTENT -->
     <main>
         
-        <!-- Page Banner -->
-        <section class="inner-banner" style="background-color: var(--primary-color); color: white; padding: 3rem 1rem; text-align: center;">
-            <h1 style="color: var(--accent-color);">About Theta Solutions</h1>
-            <p>Meet the minds behind the innovation.</p>
-        </section>
-
         <!-- 1. FOUNDERS SECTION -->
-        <section class="founders-section">
-            <h2>Founders</h2>
+        <section class="about-hero">
+            <h2>The Founders</h2>
+            <p>Visionaries driving the next generation of technology.</p>
             
-            <!-- The Overlay (Fades in on click) -->
-            <div class="founders-overlay" id="overlay"></div>
-
             <div class="team-grid">
                 
                 <!-- Founder 1 -->
                 <div class="team-card" onclick="activateCard(this)">
-                    <img src="https://picsum.photos/seed/founder1/300/400" alt="Founder 1">
-                    <div class="team-name">Alice Johnson</div>
+                    <img src="https://picsum.photos/seed/founder1/400/500" alt="Founder 1">
+                    <div class="team-name-box">
+                        <div class="team-name">Alice Johnson</div>
+                        <div class="team-role">CEO & Co-Founder</div>
+                    </div>
                     <div class="profile-details">
                         <h3>Alice Johnson</h3>
-                        <p><strong>CEO & Co-Founder</strong></p>
-                        <p>Alice has over 15 years of experience in strategic tech development. She leads the vision and global expansion of Theta Solutions.</p>
+                        <span class="role-badge">CEO & Co-Founder</span>
+                        <p>Alice has over 15 years of experience in strategic tech development. She leads the vision and global expansion of Theta Solutions, focusing on sustainable growth and innovation.</p>
                     </div>
                 </div>
 
                 <!-- Founder 2 -->
                 <div class="team-card" onclick="activateCard(this)">
-                    <img src="https://picsum.photos/seed/founder2/300/400" alt="Founder 2">
-                    <div class="team-name">Mark Smith</div>
+                    <img src="https://picsum.photos/seed/founder2/400/500" alt="Founder 2">
+                    <div class="team-name-box">
+                        <div class="team-name">Mark Smith</div>
+                        <div class="team-role">CTO & Co-Founder</div>
+                    </div>
                     <div class="profile-details">
                         <h3>Mark Smith</h3>
-                        <p><strong>CTO & Co-Founder</strong></p>
-                        <p>An expert in AI and machine learning, Mark architects the core systems that power our client solutions.</p>
+                        <span class="role-badge">CTO & Co-Founder</span>
+                        <p>An expert in AI and machine learning, Mark architects the core systems that power our client solutions. He believes in code that thinks.</p>
                     </div>
                 </div>
 
                 <!-- Founder 3 -->
                 <div class="team-card" onclick="activateCard(this)">
-                    <img src="https://picsum.photos/seed/founder3/300/400" alt="Founder 3">
-                    <div class="team-name">Sara Lee</div>
+                    <img src="https://picsum.photos/seed/founder3/400/500" alt="Founder 3">
+                    <div class="team-name-box">
+                        <div class="team-name">Sara Lee</div>
+                        <div class="team-role">Head of Product</div>
+                    </div>
                     <div class="profile-details">
                         <h3>Sara Lee</h3>
-                        <p><strong>Head of Product</strong></p>
-                        <p>Sara ensures that every software deployment meets the highest standards of user experience and functionality.</p>
+                        <span class="role-badge">Head of Product</span>
+                        <p>Sara ensures that every software deployment meets the highest standards of user experience. Her attention to detail is legendary.</p>
                     </div>
                 </div>
 
                 <!-- Founder 4 -->
                 <div class="team-card" onclick="activateCard(this)">
-                    <img src="https://picsum.photos/seed/founder4/300/400" alt="Founder 4">
-                    <div class="team-name">David Chen</div>
+                    <img src="https://picsum.photos/seed/founder4/400/500" alt="Founder 4">
+                    <div class="team-name-box">
+                        <div class="team-name">David Chen</div>
+                        <div class="team-role">VP of Engineering</div>
+                    </div>
                     <div class="profile-details">
                         <h3>David Chen</h3>
-                        <p><strong>VP of Engineering</strong></p>
-                        <p>David leads our engineering teams, fostering a culture of code excellence and rapid innovation.</p>
+                        <span class="role-badge">VP of Engineering</span>
+                        <p>David leads our engineering teams, fostering a culture of code excellence and rapid innovation across all departments.</p>
                     </div>
                 </div>
 
                 <!-- Founder 5 -->
                 <div class="team-card" onclick="activateCard(this)">
-                    <img src="https://picsum.photos/seed/founder5/300/400" alt="Founder 5">
-                    <div class="team-name">Emily Davis</div>
+                    <img src="https://picsum.photos/seed/founder5/400/500" alt="Founder 5">
+                    <div class="team-name-box">
+                        <div class="team-name">Emily Davis</div>
+                        <div class="team-role">Chief Strategy Officer</div>
+                    </div>
                     <div class="profile-details">
                         <h3>Emily Davis</h3>
-                        <p><strong>Chief Strategy Officer</strong></p>
-                        <p>Emily identifies new market opportunities and steers the company's long-term growth strategies.</p>
+                        <span class="role-badge">Chief Strategy Officer</span>
+                        <p>Emily identifies new market opportunities and steers the company's long-term growth strategies with precision.</p>
                     </div>
                 </div>
 
             </div>
         </section>
 
+        <!-- The Overlay (Backdrop) -->
+        <div class="founders-overlay" id="overlay"></div>
+
         <!-- 2. CORE MEMBERS SECTION -->
-        <section class="core-members-section">
+        <section class="core-section">
             <h2>Core Activity Team</h2>
             
             <div class="core-grid">
                 
-                <!-- Core Member 1 -->
+                <!-- Core 1 -->
                 <div class="core-card">
-                    <img src="https://picsum.photos/seed/core1/300/300" alt="Core Member 1">
+                    <img src="https://picsum.photos/seed/core1/400/400" alt="Core Member">
                     <div class="core-name">James Wilson</div>
                     <div class="core-role">Lead Developer</div>
                 </div>
 
-                <!-- Core Member 2 -->
+                <!-- Core 2 -->
                 <div class="core-card">
-                    <img src="https://picsum.photos/seed/core2/300/300" alt="Core Member 2">
+                    <img src="https://picsum.photos/seed/core2/400/400" alt="Core Member">
                     <div class="core-name">Linda Brown</div>
                     <div class="core-role">Operations Manager</div>
                 </div>
@@ -137,28 +145,46 @@
         <p>&copy; 2023 Theta Solutions. All rights reserved.</p>
     </footer>
 
-    <!-- PAGE SPECIFIC JAVASCRIPT -->
+    <!-- JAVASCRIPT -->
     <script>
-        // Get the overlay element
         const overlay = document.getElementById('overlay');
         const cards = document.querySelectorAll('.team-card');
 
         function activateCard(element) {
-            // 1. Add 'active' class to the clicked card
+            // Add active class to clicked card
             element.classList.add('active');
+            
+            // Create a close button dynamically
+            const closeBtn = document.createElement('button');
+            closeBtn.className = 'close-btn';
+            closeBtn.innerHTML = '&times;';
+            closeBtn.onclick = closeOverlay;
+            
+            // Append close button to the active card
+            element.appendChild(closeBtn);
 
-            // 2. Make the overlay visible (creates the translucent background)
+            // Show overlay
             overlay.classList.add('active');
+            
+            // Prevent body scroll when modal is open
+            document.body.style.overflow = 'hidden';
         }
 
-        // Click anywhere on the overlay to close
-        overlay.addEventListener('click', function() {
-            // Remove active class from all cards
-            cards.forEach(card => card.classList.remove('active'));
+        function closeOverlay() {
+            // Remove active classes
+            cards.forEach(card => {
+                card.classList.remove('active');
+                // Remove the close button if it exists
+                const btn = card.querySelector('.close-btn');
+                if(btn) btn.remove();
+            });
             
-            // Hide the overlay
             overlay.classList.remove('active');
-        });
+            document.body.style.overflow = 'auto'; // Restore scroll
+        }
+
+        // Click overlay to close
+        overlay.addEventListener('click', closeOverlay);
     </script>
 
 </body>
