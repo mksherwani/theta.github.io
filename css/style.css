@@ -207,169 +207,299 @@ footer {
     .circle-visual { width: 140px; height: 140px; }
 }
 
-/* --- ABOUT PAGE STYLES --- */
+/* --- ADVANCED ABOUT PAGE STYLES --- */
 
-/* Founders Grid */
-.founders-section {
-    padding: 4rem 2rem;
+/* 1. MAIN SECTION BACKGROUND */
+.about-hero {
+    background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+    padding: 5rem 2rem;
     text-align: center;
-    background-color: #fff;
+    min-height: 100vh; /* Full screen height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.founders-section h2 {
-    font-size: 2.5rem;
+.about-hero h2 {
+    font-size: 3rem;
     color: var(--primary-color);
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
+    opacity: 0; /* For animation entry */
+    animation: fadeInDown 1s ease forwards;
 }
 
+.about-hero p {
+    font-size: 1.2rem;
+    color: #64748b;
+    max-width: 600px;
+    margin-bottom: 4rem;
+    opacity: 0;
+    animation: fadeInUp 1s ease 0.3s forwards;
+}
+
+/* 2. FOUNDERS GRID (3D Cards) */
 .team-grid {
     display: flex;
     justify-content: center;
-    gap: 2rem;
+    gap: 2.5rem;
     flex-wrap: wrap;
-    position: relative; /* Important for z-index layering */
-    z-index: 1;
+    position: relative;
+    z-index: 10;
 }
 
 .team-card {
     position: relative;
-    width: 200px;
+    width: 220px;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     cursor: pointer;
-    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-    z-index: 10;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy effect */
+    transform-style: preserve-3d;
+    opacity: 0;
+    animation: popIn 0.6s ease forwards;
 }
 
-/* Image Styling */
+/* Staggered animation delay for cards */
+.team-card:nth-child(1) { animation-delay: 0.5s; }
+.team-card:nth-child(2) { animation-delay: 0.6s; }
+.team-card:nth-child(3) { animation-delay: 0.7s; }
+.team-card:nth-child(4) { animation-delay: 0.8s; }
+.team-card:nth-child(5) { animation-delay: 0.9s; }
+
+/* Image Styling: Grayscale to Color */
 .team-card img {
     width: 100%;
-    height: 250px;
+    height: 280px;
     object-fit: cover;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    filter: grayscale(100%); /* Start Black & White */
     transition: all 0.5s ease;
 }
 
-/* Name Styling */
-.team-name {
-    margin-top: 10px;
-    font-weight: 700;
-    color: var(--primary-color);
-    font-size: 1.1rem;
-}
-
-/* --- HOVER EFFECT --- */
-.team-card:hover {
-    transform: translateY(-10px);
-}
-.team-card:hover img {
-    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-}
-
-/* --- ACTIVE / CLICKED STATE (The Expansion) --- */
-/* When a card has the class 'active' */
-.team-card.active {
-    position: fixed; /* Fixes it to the screen center */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px; /* Expanded width */
-    z-index: 1000; /* Sits on top of everything */
-    pointer-events: none; /* Lets clicks pass through to the overlay */
-}
-
-.team-card.active img {
-    height: 400px; /* Expanded height */
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-}
-
-/* Hidden Profile Text (Reveals on click) */
-.profile-details {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
+.team-name-box {
+    padding: 1.5rem;
     background: white;
-    padding: 0 20px;
-    transition: all 0.5s ease;
-    text-align: left;
-    border-radius: 0 0 10px 10px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 2;
 }
 
-.team-card.active .profile-details {
-    max-height: 200px;
-    opacity: 1;
-    padding: 20px;
-    margin-top: -5px; /* Connect to image */
-    pointer-events: auto; /* Allow selecting text inside */
+.team-name {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.team-card.active .team-name {
-    display: none; /* Hide small name when expanded */
+.team-role {
+    font-size: 0.85rem;
+    color: var(--accent-color);
+    font-weight: 600;
+    margin-top: 5px;
 }
 
-/* --- TRANSLUCENT BACKGROUND --- */
-/* An overlay that appears when someone is clicked */
+/* --- HOVER EFFECTS --- */
+.team-card:hover {
+    transform: translateY(-15px) scale(1.05); /* Lift up and grow */
+    box-shadow: 0 20px 40px rgba(56, 189, 248, 0.4); /* Blue Glow */
+}
+
+.team-card:hover img {
+    filter: grayscale(0%); /* Turn to color */
+    transform: scale(1.1); /* Zoom image slightly */
+}
+
+/* --- ACTIVE / EXPANDED STATE (The Modal) --- */
 .founders-overlay {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(15, 23, 42, 0.85); /* Dark Navy with transparency */
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(15, 23, 42, 0.6); /* Darker, sleeker overlay */
+    backdrop-filter: blur(8px); /* Frosted glass effect on background */
     z-index: 900;
     opacity: 0;
-    pointer-events: none; /* Clicks go through when hidden */
-    transition: opacity 0.5s ease;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .founders-overlay.active {
     opacity: 1;
-    pointer-events: auto; /* Catches clicks to close */
+    pointer-events: auto;
 }
 
-/* --- CORE MEMBERS SECTION --- */
-.core-members-section {
-    background-color: #f8fafc;
-    padding: 4rem 2rem;
+/* The Expanded Card */
+.team-card.active {
+    position: relative; /* Change from fixed to work with flex overlay */
+    width: 450px;
+    height: auto;
+    z-index: 1000;
+    transform: scale(1) !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    pointer-events: auto;
+    animation: none; /* Stop entry animation */
+    opacity: 1;
+}
+
+.team-card.active img {
+    height: 350px;
+    filter: grayscale(0%);
+}
+
+/* Hidden Details (Revealed on click) */
+.profile-details {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    background: rgba(255, 255, 255, 0.95);
+    transition: all 0.5s ease;
+    padding: 0 2rem;
+    text-align: left;
+}
+
+.team-card.active .profile-details {
+    max-height: 500px;
+    opacity: 1;
+    padding: 2rem;
+    border-top: 1px solid #eee;
+}
+
+.team-card.active .team-name-box {
+    display: none; /* Hide the small info box when expanded */
+}
+
+.profile-details h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.profile-details .role-badge {
+    display: inline-block;
+    background: var(--accent-color);
+    color: var(--bg-dark);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.profile-details p {
+    color: #555;
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: white;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 1001;
+    transition: transform 0.3s;
+}
+.close-btn:hover { transform: rotate(90deg); background: var(--accent-color); }
+
+
+/* 3. CORE MEMBERS (Floating Circles) */
+.core-section {
+    background: white;
+    padding: 5rem 2rem;
     text-align: center;
-    border-top: 1px solid #e2e8f0;
+    position: relative;
+    overflow: hidden;
 }
 
-.core-members-section h2 {
+/* Decorative background circle */
+.core-section::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.05) 0%, rgba(255,255,255,0) 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+.core-section h2 {
     font-size: 2rem;
     color: var(--primary-color);
-    margin-bottom: 2rem;
-    text-transform: uppercase;
+    margin-bottom: 4rem;
+    position: relative;
+    z-index: 2;
 }
 
 .core-grid {
     display: flex;
     justify-content: center;
-    gap: 4rem;
-    flex-wrap: wrap;
+    gap: 5rem;
+    position: relative;
+    z-index: 2;
 }
 
+.core-card {
+    animation: float 6s ease-in-out infinite;
+}
+
+.core-card:nth-child(2) { animation-delay: 3s; } /* Offset the float */
+
 .core-card img {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%; /* Circles for core members */
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
     object-fit: cover;
-    border: 4px solid white;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    margin-bottom: 1rem;
-    transition: transform 0.3s;
+    border: 5px solid white;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    transition: all 0.4s ease;
 }
 
 .core-card:hover img {
-    transform: scale(1.1);
+    transform: scale(1.15) rotate(5deg);
+    border-color: var(--accent-color);
 }
 
 .core-name {
+    margin-top: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 700;
-    color: var(--text-dark);
+    color: var(--primary-color);
 }
 
 .core-role {
-    font-size: 0.9rem;
-    color: #64748b;
+    color: var(--accent-color);
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-top: 5px;
+}
+
+/* --- ANIMATIONS --- */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
 }
