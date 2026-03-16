@@ -207,7 +207,10 @@ footer {
     .circle-visual { width: 140px; height: 140px; }
 }
 
-/* --- ADVANCED ABOUT PAGE STYLES --- */
+/* ============================================================
+   CORRECTED ADVANCED ABOUT PAGE STYLES 
+   (This replaces the old broken version)
+   ============================================================ */
 
 /* 1. MAIN SECTION BACKGROUND */
 .about-hero {
