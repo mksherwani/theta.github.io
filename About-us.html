@@ -41,16 +41,32 @@
                 
                 <!-- Founder 1 -->
                 <div class="team-card" onclick="activateCard(this)">
-                    <img src="https://picsum.photos/seed/founder1/400/500" alt="Founder 1">
+                    
+                    <!-- 1. The Image -->
+                    <img src="https://picsum.photos/seed/founder1/600/800" alt="Founder 1">
+                    
+                    <!-- 2. Small Name Box (Visible when NOT clicked) -->
                     <div class="team-name-box">
                         <div class="team-name">Alice Johnson</div>
                         <div class="team-role">CEO & Co-Founder</div>
                     </div>
+                    
+                    <!-- 3. Profile Details (Visible WHEN CLICKED - Right Side) -->
                     <div class="profile-details">
-                        <h3>Alice Johnson</h3>
+                        <!-- Name and Role appear HERE in the split view -->
+                        <h3 style="font-size: 2rem; color: var(--primary-color); margin-bottom: 5px;">Alice Johnson</h3>
                         <span class="role-badge">CEO & Co-Founder</span>
-                        <p>Alice has over 15 years of experience in strategic tech development. She leads the vision and global expansion of Theta Solutions, focusing on sustainable growth and innovation.</p>
+                        
+                        <p style="margin-top: 20px; line-height: 1.8; color: #444;">
+                            Alice has over 15 years of experience in strategic tech development. She leads the vision and global expansion of Theta Solutions, focusing on sustainable growth and innovation. Her expertise lies in scaling startups into global enterprises.
+                        </p>
+                        
+                        <!-- Optional: Add more details -->
+                        <p style="margin-top: 15px; line-height: 1.8; color: #444;">
+                            <strong>Key Skills:</strong> Strategic Planning, Global Operations, Product Vision.
+                        </p>
                     </div>
+                    
                 </div>
 
                 <!-- Founder 2 -->
