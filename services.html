@@ -13,40 +13,41 @@
     <style>
         /* --- RESET & VARS --- */
         :root {
-            --bg-color: #0f172a; /* Bluish Dark Theme */
+            --bg-color: #0f172a;
             --bg-secondary: #1e293b;
             --text-color: #e2e8f0;
-            --accent-color: #38bdf8; /* Bright Blue */
-            --cursor-size: 20px;
+            --accent-color: #38bdf8;
             --font-main: 'Outfit', sans-serif;
             --font-serif: 'Playfair Display', serif;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
-
-        body {
+        html, body {
+            margin: 0; padding: 0; box-sizing: border-box;
+            position: relative; width: 100%;
             background-color: var(--bg-color);
             color: var(--text-color);
             font-family: var(--font-main);
-            overflow-x: hidden;
+            overflow-x: hidden; /* Hide horizontal scroll */
             line-height: 1.1;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
         /* --- GRAIN OVERLAY --- */
         .noise-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
-            z-index: 9999;
+            z-index: 9998; /* Kept below header */
             opacity: 0.05;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3Cfilter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
         /* --- CUSTOM CURSOR --- */
         .cursor-dot, .cursor-outline {
             position: fixed; top: 0; left: 0;
             transform: translate(-50%, -50%);
-            border-radius: 50%; z-index: 10001; pointer-events: none;
+            border-radius: 50%; z-index: 10000; pointer-events: none;
         }
         .cursor-dot { width: 8px; height: 8px; background-color: var(--text-color); }
         .cursor-outline { width: 40px; height: 40px; border: 1px solid var(--text-color); transition: width 0.2s, height 0.2s, background-color 0.2s; }
@@ -55,124 +56,75 @@
         }
 
         /* --- HEADER --- */
-
         .main-header {
-            position: fixed; /* Sticks to top */
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 1.5rem 2rem; /* Increased padding for visibility */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            
-            /* CRITICAL FIXES */
-            z-index: 99999; /* Extremely high z-index */
-            background-color: #0f172a; /* Solid Opaque Color (no blur) */
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            padding: 1.5rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 9999; 
+            background-color: #0f172a; 
             border-bottom: 2px solid rgba(255,255,255,0.1);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5); /* Strong shadow to lift it off page */
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
 
-        .brand-area {
-            display: flex; align-items: center; gap: 12px;
-            z-index: 10001;
-        }
-
-        .logo-icon {
-            font-size: 2rem; color: var(--accent-color); font-weight: bold;
-            line-height: 1;
-        }
-
-        .company-name {
-            font-size: 1.3rem; font-weight: 800; color: white; letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        nav { 
-            z-index: 10001; 
-        }
+        .brand-area { display: flex; align-items: center; gap: 12px; z-index: 10001; }
+        .logo-icon { font-size: 2rem; color: var(--accent-color); font-weight: bold; line-height: 1; }
+        .company-name { font-size: 1.3rem; font-weight: 800; color: white; letter-spacing: 1px; text-transform: uppercase; }
+        nav { z-index: 10001; }
         nav ul { display: flex; gap: 25px; list-style: none; }
-        nav a {
-            font-size: 0.9rem; font-weight: 500; color: #cbd5e1;
-            text-transform: uppercase; letter-spacing: 1px; text-decoration: none;
-            transition: color 0.3s;
-            position: relative;
-        }
+        nav a { font-size: 0.9rem; font-weight: 500; color: #cbd5e1; text-transform: uppercase; text-decoration: none; transition: color 0.3s; position: relative; }
         nav a:hover { color: var(--accent-color); }
-        nav a::after {
-            content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0;
-            background-color: var(--accent-color); transition: width 0.3s ease;
-        }
+        nav a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background-color: var(--accent-color); transition: width 0.3s ease; }
         nav a:hover::after { width: 100%; }
 
-        /* --- HERO SECTION (SLIDESHOW) --- */
+        /* --- HERO SECTION --- */
         .hero {
             height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 0 5vw;
-            position: relative;
-            overflow: hidden;
+            display: flex; flex-direction: column; justify-content: center;
+            padding: 0 5vw; position: relative; overflow: hidden;
         }
 
-        .hero-slider {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 0;
-        }
+        .hero-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
         
         .hero-slide {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-            filter: brightness(0.4); /* Darker to make text pop */
+            object-fit: cover; opacity: 0; transition: opacity 1s ease-in-out; filter: brightness(0.4);
         }
         .hero-slide.active { opacity: 1; }
 
         h1 {
-            font-size: clamp(3rem, 8vw, 8rem);
-            font-weight: 800; line-height: 0.85;
-            text-transform: uppercase; letter-spacing: -2px;
-            mix-blend-mode: difference;
+            font-size: clamp(3rem, 8vw, 8rem); font-weight: 800; line-height: 0.85;
+            text-transform: uppercase; letter-spacing: -2px; mix-blend-mode: difference;
             position: relative; z-index: 2;
         }
 
         /* --- TEXT SECTIONS --- */
         .section {
-            min-height: 80vh;
-            padding: 10vh 5vw;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            min-height: 80vh; padding: 10vh 5vw;
+            display: flex; flex-direction: column; justify-content: center;
             border-top: 1px solid rgba(255,255,255,0.05);
-            position: relative;
-            overflow: hidden;
+            position: relative; z-index: 1; /* Ensure z-index */
         }
 
         .section-title {
-            font-size: clamp(2rem, 5vw, 4rem);
-            font-family: var(--font-serif);
-            font-style: italic;
-            margin-bottom: 4rem;
-            color: var(--accent-color);
+            font-size: clamp(2rem, 5vw, 4rem); font-family: var(--font-serif);
+            font-style: italic; margin-bottom: 4rem; color: var(--accent-color);
         }
 
-        .big-text {
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            font-weight: 300;
-            line-height: 1.3;
-            max-width: 800px;
-        }
+        .big-text { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; line-height: 1.3; max-width: 800px; }
 
-        /* --- MARQUEE --- */
+        /* --- MARQUEE (FIXED OVERLAP) --- */
         .marquee-wrap {
             overflow: hidden; white-space: nowrap; padding: 3rem 0;
             background: var(--accent-color); color: var(--bg-color);
             transform: rotate(-2deg) scale(1.1);
-            margin: 0;
+            
+            /* FIX: Added margin to prevent overlap with next section */
+            margin: 6rem 0; 
+            
             border-top: 1px solid rgba(255,255,255,0.1);
             border-bottom: 1px solid rgba(255,255,255,0.1);
+            position: relative; z-index: 2;
         }
 
         .marquee-content {
@@ -185,112 +137,58 @@
             100% { transform: translateX(-50%); }
         }
 
-        /* --- SERVICES GRID (4 Blocks) --- */
+        /* --- SERVICES GRID --- */
         .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem; width: 100%;
         }
 
         .service-card {
-            position: relative;
-            overflow: hidden;
-            height: 350px;
-            border-radius: 8px;
-            cursor: pointer;
+            position: relative; overflow: hidden; height: 350px; border-radius: 8px; cursor: pointer;
         }
 
         .service-card img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-            filter: grayscale(100%);
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); filter: grayscale(100%);
         }
 
-        .service-card:hover img {
-            transform: scale(1.1);
-            filter: grayscale(0%);
-        }
+        .service-card:hover img { transform: scale(1.1); filter: grayscale(0%); }
 
         .service-info {
-            position: absolute; bottom: 0; left: 0;
-            padding: 2rem;
+            position: absolute; bottom: 0; left: 0; padding: 2rem;
             background: linear-gradient(to top, rgba(15, 23, 42, 0.95), transparent);
-            width: 100%;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.4s ease;
+            width: 100%; opacity: 0; transform: translateY(20px); transition: all 0.4s ease;
         }
 
         .service-card:hover .service-info { opacity: 1; transform: translateY(0); }
         .service-info h3 { color: var(--accent-color); font-size: 1.5rem; margin-bottom: 0.5rem; text-transform: uppercase; }
         .service-info p { color: #fff; font-size: 0.9rem; }
 
-        /* --- VISION & MISSION SPLIT --- */
+        /* --- VISION & MISSION --- */
         .vision-mission-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4rem;
-            width: 100%;
-            align-items: center;
-            justify-content: space-between;
+            display: flex; flex-wrap: wrap; gap: 4rem; width: 100%; align-items: center; justify-content: space-between;
         }
-
-        .vm-block {
-            flex: 1;
-            min-width: 300px;
-        }
-
+        .vm-block { flex: 1; min-width: 300px; }
         .vm-title {
-            font-size: 2.5rem;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            font-weight: 800;
-            border-bottom: 2px solid rgba(255,255,255,0.1);
-            padding-bottom: 1rem;
-            display: inline-block;
+            font-size: 2.5rem; color: var(--accent-color); margin-bottom: 1rem;
+            text-transform: uppercase; font-weight: 800;
+            border-bottom: 2px solid rgba(255,255,255,0.1); padding-bottom: 1rem; display: inline-block;
         }
+        .vm-text { font-size: 1.2rem; line-height: 1.6; color: #cbd5e1; }
 
-        .vm-text {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            color: #cbd5e1;
-        }
-
-        /* ============================================================
-           ANIMATIONS (TAKEN FROM REFERENCE CODE)
-           ============================================================ */
-        .reveal-up {
-            opacity: 0;
-            transform: translateY(100px);
-            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .reveal-left {
-            opacity: 0;
-            transform: translateX(-100px);
-            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .reveal-right {
-            opacity: 0;
-            transform: translateX(100px);
-            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .active-reveal {
-            opacity: 1;
-            transform: translate(0, 0);
-        }
+        /* --- ANIMATIONS --- */
+        .reveal-up { opacity: 0; transform: translateY(100px); transition: all 1s cubic-bezier(0.22, 1, 0.36, 1); }
+        .reveal-left { opacity: 0; transform: translateX(-100px); transition: all 1s cubic-bezier(0.22, 1, 0.36, 1); }
+        .reveal-right { opacity: 0; transform: translateX(100px); transition: all 1s cubic-bezier(0.22, 1, 0.36, 1); }
+        .active-reveal { opacity: 1; transform: translate(0, 0); }
 
         /* Mobile Adjustments */
         @media (max-width: 768px) {
-            .cursor-dot, .cursor-outline { display: none; }
-            * { cursor: auto; }
+            .cursor-dot, .cursor-outline { display: none; } * { cursor: auto; }
             h1 { font-size: 3.5rem; }
             .vision-mission-container { flex-direction: column; }
             .service-card { height: 250px; }
+            .marquee-wrap { transform: rotate(-2deg) scale(1.0); margin: 4rem 0; } /* Don't scale on mobile to prevent overlap */
         }
     </style>
 </head>
@@ -320,26 +218,23 @@
         </nav>
     </div>
 
-    <!-- HERO (Slideshow with SPECIFIC IT/Earth images) -->
+    <!-- HERO -->
     <header class="hero">
         <div class="hero-slider">
-            <!-- Updated with direct Unsplash Tech Links -->
             <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop" class="hero-slide active" alt="Global Network">
             <img src="https://images.unsplash.com/photo-1558494949-ef526b0042a0?q=80&w=2070&auto=format&fit=crop" class="hero-slide" alt="Server Room">
-            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop" alt="Data Circuit">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop" class="hero-slide" alt="Data Circuit">
             <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2070&auto=format&fit=crop" class="hero-slide" alt="Cyber Security">
             <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop" class="hero-slide" alt="Connected Globe">
         </div>
 
-        <!-- Animation Class Applied -->
         <div class="reveal-up">
             <h1>Digital<br>Innovation<br>Simplified.</h1>
         </div>
-    </div>
+    </header>
 
     <!-- PHILOSOPHY TEXT -->
     <section class="section">
-        <!-- Animation Class Applied -->
         <div class="reveal-left">
             <h2 class="section-title">Philosophy</h2>
             <p class="big-text">
@@ -360,17 +255,16 @@
             INNOVATION • STRATEGY • DEVELOPMENT • AI • SERVICES • DEPLOYMENT • NETWORK • SYSTEM • APPLICATIONS • WEB
             INNOVATION • STRATEGY • DEVELOPMENT • AI • SERVICES • DEPLOYMENT • NETWORK • SYSTEM • APPLICATIONS • WEB
         </div>
-    </header>
+    </div>
+    <!-- REMOVED THE STRAY </header> TAG THAT WAS HERE -->
 
-    <!-- OUR SERVICES (4 Blocks) -->
+    <!-- OUR SERVICES -->
     <section class="section">
-        <!-- Animation Class Applied -->
         <div class="reveal-up" style="width: 100%;">
             <h2 class="section-title">Our Services</h2>
         </div>
         
         <div class="grid">
-            <!-- Animation Classes Applied with Delays -->
             <div class="service-card reveal-up">
                 <img src="https://picsum.photos/seed/support/600/800" alt="IT Support">
                 <div class="service-info">
@@ -405,11 +299,10 @@
         </div>
     </section>
 
-    <!-- VISION & MISSION (Split Animation) -->
+    <!-- VISION & MISSION -->
     <section class="section" style="background-color: #0b1120;">
         <div class="vision-mission-container">
             
-            <!-- Animation Class Applied (Left) -->
             <div class="vm-block reveal-left">
                 <div class="vm-title">Our Vision</div>
                 <p class="vm-text">
@@ -417,7 +310,6 @@
                 </p>
             </div>
 
-            <!-- Animation Class Applied (Right) -->
             <div class="vm-block reveal-right">
                 <div class="vm-title">Our Mission</div>
                 <p class="vm-text">
@@ -435,7 +327,6 @@
 
     <!-- JAVASCRIPT -->
     <script>
-        // 1. CUSTOM CURSOR
         const cursorDot = document.querySelector('[data-cursor-dot]');
         const cursorOutline = document.querySelector('[data-cursor-outline]');
         window.addEventListener('mousemove', function (e) {
@@ -444,7 +335,6 @@
             cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
         });
 
-        // 2. SCROLL REVEAL ANIMATIONS (From Reference Code)
         const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
         const revealOnScroll = () => {
             const windowHeight = window.innerHeight; const elementVisible = 100;
@@ -454,20 +344,17 @@
             });
         };
         window.addEventListener('scroll', revealOnScroll);
-        revealOnScroll(); // Trigger once on load
+        revealOnScroll();
 
-        // 3. HERO SLIDESHOW
         const slides = document.querySelectorAll('.hero-slide');
         let currentSlide = 0;
-        const slideInterval = 3000; // Change every 3 seconds
-
+        const slideInterval = 3000; 
         function nextSlide() {
             slides[currentSlide].classList.remove('active');
             currentSlide = (currentSlide + 1) % slides.length;
             slides[currentSlide].classList.add('active');
         }
         setInterval(nextSlide, slideInterval);
-
     </script>
 </body>
 </html>
