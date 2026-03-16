@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <!-- HEADER -->
+    <!-- HEADER (Fixed on top) -->
     <header id="main-header">
         <div class="header-container">
             <div class="brand-area">
@@ -18,174 +18,198 @@
             
             <nav>
                 <ul>
-                    <li><a href="index.html" class="active-link">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="portfolio.html">Portfolio</a></li>
-                    <li><a href="careers.html">Careers</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="#section-slider" class="active-link">Home</a></li>
+                    <li><a href="#section-services" class="nav-link">Services</a></li>
+                    <li><a href="#section-vision" class="nav-link">Vision</a></li>
+                    <li><a href="About-us.html" class="nav-link">About Us</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- MAIN CONTENT -->
-    <main>
+    <!-- SNAP SCROLL CONTAINER -->
+    <div class="snap-container">
         
-        <!-- 1. FULL SCREEN SLIDER (Shrinks on scroll) -->
-        <section class="slider-container" id="home-slider">
-            <div class="slide-overlay">
-                <h2>Innovating the Future</h2>
-                <p>Theta Solutions delivers excellence.</p>
-            </div>
-
-            <!-- Hidden Info Text (Appears when scrolled) -->
-            <div class="slider-info">
-                <h3>Driving Digital Transformation</h3>
-                <p>We specialize in AI, Software Development, and IT Deployment for the modern enterprise.</p>
-            </div>
-
-            <div class="slide active" style="background-image: url('https://picsum.photos/seed/tech1/1920/1080');"></div>
-            <div class="slide" style="background-image: url('https://picsum.photos/seed/tech2/1920/1080');"></div>
-            <div class="slide" style="background-image: url('https://picsum.photos/seed/tech3/1920/1080');"></div>
-            <div class="slide" style="background-image: url('https://picsum.photos/seed/tech4/1920/1080');"></div>
-            <div class="slide" style="background-image: url('https://picsum.photos/seed/tech5/1920/1080');"></div>
-        </section>
-
-        <!-- 2. INFINITE SCROLLING SERVICES (Marquee) -->
-        <section class="marquee-section">
-            <h2>Our Core Expertise</h2>
-            
-            <!-- Marquee Container -->
-            <div class="marquee-container">
-                
-                <!-- SET 1 (Original) -->
-                <a href="it-support.html" class="marquee-item circle-item">
-                    <div class="circle-visual">
-                        <img src="https://picsum.photos/seed/support/300/300" alt="IT Support">
-                    </div>
-                    <div class="circle-title">IT Support</div>
-                </a>
-
-                <a href="it-deployment.html" class="marquee-item circle-item">
-                    <div class="circle-visual">
-                        <img src="https://picsum.photos/seed/server/300/300" alt="IT Deployment">
-                    </div>
-                    <div class="circle-title">IT Deployment</div>
-                </a>
-
-                <a href="software-dev.html" class="marquee-item circle-item">
-                    <div class="circle-visual">
-                        <img src="https://picsum.photos/seed/code/300/300" alt="Software Development">
-                    </div>
-                    <div class="circle-title">Software Dev</div>
-                </a>
-
-                <a href="ai-tools.html" class="marquee-item circle-item">
-                    <div class="circle-visual">
-                        <img src="https://picsum.photos/seed/ai/300/300" alt="AI Tools">
-                    </div>
-                    <div class="circle-title">AI Tools Dev</div>
-                </a>
-
-                <!-- SET 2 (Duplicate for seamless loop) -->
-                <a href="it-support.html" class="marquee-item circle-item">
-                    <div class="circle-visual">
-                        <img src="https://picsum.photos/seed/support/300/300" alt="IT Support">
-                    </div>
-                    <div class="circle-title">IT Support</div>
-                </a>
-
-                <a href="it-deployment.html" class="marquee-item circle-item">
-                    <div class="circle-visual">
-                        <img src="https://picsum.photos/seed/server/300/300" alt="IT Deployment">
-                    </div>
-                    <div class="circle-title">IT Deployment</div>
-                </a>
-
-                <a href="software-dev.html" class="marquee-item circle-item">
-                    <div class="circle-visual">
-                        <img src="https://picsum.photos/seed/code/300/300" alt="Software Development">
-                    </div>
-                    <div class="circle-title">Software Dev</div>
-                </a>
-
-                <a href="ai-tools.html" class="marquee-item circle-item">
-                    <div class="circle-visual">
-                        <img src="https://picsum.photos/seed/ai/300/300" alt="AI Tools">
-                    </div>
-                    <div class="circle-title">AI Tools Dev</div>
-                </a>
-                
-            </div>
-        </section>
-
-        <!-- 3. VISION AND MISSION (Zoom In on Scroll) -->
-        <!-- Added 'reveal-section' class for the animation -->
-        <section class="split-section reveal-section">
-            
-            <div class="split-half vision-section">
-                <h2 class="section-title">Our Vision</h2>
-                <div class="section-content">
-                    <p>At Theta Solutions, we envision a world where technology seamlessly integrates with human potential. We strive to be the leading catalyst for digital transformation, empowering businesses to reach new heights.</p>
+        <!-- PAGE 1: SLIDER -->
+        <section class="snap-section" id="section-slider">
+            <div class="slider-container" id="home-slider">
+                <div class="slide-overlay">
+                    <h2>Innovating the Future</h2>
+                    <p>Theta Solutions delivers excellence.</p>
                 </div>
-                <a href="about.html" class="cta-button" style="color: #fff;">Learn More</a>
-            </div>
 
-            <div class="split-half mission-section">
-                <h2 class="section-title">Our Mission</h2>
-                <div class="section-content">
-                    <p>Our mission is to provide cutting-edge software solutions that solve complex challenges. We are dedicated to delivering exceptional value to our clients through robust engineering and user-centric design.</p>
+                <!-- Info Text (Visible on scroll interaction) -->
+                <div class="slider-info">
+                    <h3>Driving Digital Transformation</h3>
+                    <p>We specialize in AI, Software Development, and IT Deployment.</p>
                 </div>
-                <a href="contact.html" class="cta-button">Get in Touch</a>
-            </div>
 
+                <div class="slide active" style="background-image: url('https://picsum.photos/seed/tech1/1920/1080');"></div>
+                <div class="slide" style="background-image: url('https://picsum.photos/seed/tech2/1920/1080');"></div>
+                <div class="slide" style="background-image: url('https://picsum.photos/seed/tech3/1920/1080');"></div>
+                <div class="slide" style="background-image: url('https://picsum.photos/seed/tech4/1920/1080');"></div>
+                <div class="slide" style="background-image: url('https://picsum.photos/seed/tech5/1920/1080');"></div>
+            </div>
         </section>
 
-    </main>
+        <!-- PAGE 2: SERVICES (Infinite Scroll) -->
+        <section class="snap-section" id="section-services">
+            <div class="marquee-section">
+                <h2>Our Core Expertise</h2>
+                
+                <div class="marquee-container">
+                    <!-- Original Set -->
+                    <a href="it-support.html" class="marquee-item circle-item">
+                        <div class="circle-visual"><img src="https://picsum.photos/seed/support/300/300" alt="IT Support"></div>
+                        <div class="circle-title">IT Support</div>
+                    </a>
+                    <a href="it-deployment.html" class="marquee-item circle-item">
+                        <div class="circle-visual"><img src="https://picsum.photos/seed/server/300/300" alt="IT Deployment"></div>
+                        <div class="circle-title">IT Deployment</div>
+                    </a>
+                    <a href="software-dev.html" class="marquee-item circle-item">
+                        <div class="circle-visual"><img src="https://picsum.photos/seed/code/300/300" alt="Software Development"></div>
+                        <div class="circle-title">Software Dev</div>
+                    </a>
+                    <a href="ai-tools.html" class="marquee-item circle-item">
+                        <div class="circle-visual"><img src="https://picsum.photos/seed/ai/300/300" alt="AI Tools"></div>
+                        <div class="circle-title">AI Tools Dev</div>
+                    </a>
+                    <!-- Duplicate Set for Loop -->
+                    <a href="it-support.html" class="marquee-item circle-item">
+                        <div class="circle-visual"><img src="https://picsum.photos/seed/support/300/300" alt="IT Support"></div>
+                        <div class="circle-title">IT Support</div>
+                    </a>
+                    <a href="it-deployment.html" class="marquee-item circle-item">
+                        <div class="circle-visual"><img src="https://picsum.photos/seed/server/300/300" alt="IT Deployment"></div>
+                        <div class="circle-title">IT Deployment</div>
+                    </a>
+                    <a href="software-dev.html" class="marquee-item circle-item">
+                        <div class="circle-visual"><img src="https://picsum.photos/seed/code/300/300" alt="Software Development"></div>
+                        <div class="circle-title">Software Dev</div>
+                    </a>
+                    <a href="ai-tools.html" class="marquee-item circle-item">
+                        <div class="circle-visual"><img src="https://picsum.photos/seed/ai/300/300" alt="AI Tools"></div>
+                        <div class="circle-title">AI Tools Dev</div>
+                    </a>
+                </div>
+            </div>
+        </section>
 
-    <!-- FOOTER -->
-    <footer>
-        <p>&copy; 2023 Theta Solutions. All rights reserved.</p>
-    </footer>
+        <!-- PAGE 3: VISION & MISSION (Zoom In) -->
+        <section class="snap-section reveal-section" id="section-vision">
+            <div class="split-section">
+                <div class="split-half vision-section">
+                    <h2 class="section-title">Our Vision</h2>
+                    <div class="section-content">
+                        <p>At Theta Solutions, we envision a world where technology seamlessly integrates with human potential. We strive to be the leading catalyst for digital transformation.</p>
+                    </div>
+                    <a href="about.html" class="cta-button" style="color: #fff;">Learn More</a>
+                </div>
+
+                <div class="split-half mission-section">
+                    <h2 class="section-title">Our Mission</h2>
+                    <div class="section-content">
+                        <p>Our mission is to provide cutting-edge software solutions that solve complex challenges. We are dedicated to delivering exceptional value to our clients through robust engineering.</p>
+                    </div>
+                    <a href="contact.html" class="cta-button">Get in Touch</a>
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <!-- END SNAP CONTAINER -->
+
+    <!-- FOOTER (Stays at bottom of last section or fixed? Let's put it inside the last section or make it a 4th section) -->
+    <!-- For a "New Page" feel, let's make the Footer a 4th page -->
+    <section class="snap-section" id="section-footer" style="background: #0f172a; display: flex; align-items: center; justify-content: center;">
+        <footer>
+            <p style="color: #fff; font-size: 1.2rem;">&copy; 2023 Theta Solutions. All rights reserved.</p>
+            <div style="margin-top: 1rem;">
+                <a href="#" style="color: #888; margin: 0 10px;">LinkedIn</a>
+                <a href="#" style="color: #888; margin: 0 10px;">Twitter</a>
+                <a href="#" style="color: #888; margin: 0 10px;">Instagram</a>
+            </div>
+        </footer>
+    </section>
 
     <!-- JAVASCRIPT -->
     <script src="js/main.js"></script>
     
-    <!-- INDEX PAGE SPECIFIC SCRIPTS -->
     <script>
-        // 1. SLIDER SHRINK & HEADER SCROLL EFFECT
+        // 1. HANDLE NAVIGATION HIGHLIGHTS
+        const sections = document.querySelectorAll('.snap-section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const homeLink = document.querySelector('.active-link');
+
         window.addEventListener('scroll', () => {
-            const slider = document.getElementById('home-slider');
-            const header = document.getElementById('main-header');
-            
-            if (window.scrollY > 50) {
-                slider.classList.add('shrink');
-                header.classList.add('scrolled');
-            } else {
-                slider.classList.remove('shrink');
-                header.classList.remove('scrolled');
-            }
-        });
-
-        // 2. SCROLL REVEAL ANIMATION (ZOOM IN EFFECT)
-        const revealElements = document.querySelectorAll('.reveal-section');
-
-        const revealOnScroll = () => {
-            const windowHeight = window.innerHeight;
-            const elementVisible = 150;
-
-            revealElements.forEach((reveal) => {
-                const elementTop = reveal.getBoundingClientRect().top;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveal.classList.add('active');
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                // Since we use snap, offset is usually 0 or close to it
+                if (scrollY >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
                 }
             });
-        };
 
-        window.addEventListener('scroll', revealOnScroll);
-        // Trigger once on load
-        revealOnScroll();
+            // Simple check for snap scroll
+            if(current === 'section-slider') homeLink.classList.add('active-link'); else homeLink.classList.remove('active-link');
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active-link');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active-link');
+                }
+            });
+        });
+
+        // 2. HANDLE SLIDER TEXT ANIMATION (Zoom In Effect for Text only)
+        const slider = document.getElementById('home-slider');
+        const infoText = document.querySelector('.slider-info');
+        const mainTitle = document.querySelector('.slide-overlay');
+
+        // We use IntersectionObserver to detect when the slider is in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Show main title
+                    mainTitle.style.opacity = '1';
+                    mainTitle.style.transform = 'translate(-50%, -50%) scale(1)';
+                    infoText.style.opacity = '0';
+                } else {
+                    // Hide main title, show info text
+                    mainTitle.style.opacity = '0';
+                    mainTitle.style.transform = 'translate(-50%, -40%) scale(0.9)';
+                    infoText.style.opacity = '1';
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(slider);
+
+        // 3. REVEAL ANIMATIONS (Zoom In for Vision Section)
+        const revealSection = document.querySelector('.reveal-section');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    
+                    // Animate children
+                    const halves = entry.target.querySelectorAll('.split-half');
+                    halves.forEach((half, index) => {
+                        setTimeout(() => {
+                            half.style.opacity = '1';
+                            half.style.transform = 'translateY(0)';
+                        }, index * 200); // Stagger
+                    });
+                }
+            });
+        }, { threshold: 0.3 });
+
+        revealObserver.observe(revealSection);
     </script>
 
 </body>
