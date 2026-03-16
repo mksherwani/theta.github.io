@@ -20,13 +20,17 @@ body {
 a { text-decoration: none; color: inherit; transition: color 0.3s; }
 ul { list-style: none; }
 
-/* --- HEADER --- */
+/* --- HEADER (Fixed for Full Page Scroll) --- */
 header {
     background-color: var(--bg-light);
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    position: sticky;
+    position: fixed; /* Fixed to top so it stays while scrolling pages */
     top: 0;
-    z-index: 1000;
+    width: 100%;
+    z-index: 9999; /* Highest z-index to sit above everything */
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
 }
 
 .header-container {
@@ -57,14 +61,16 @@ header {
 }
 
 nav ul { display: flex; gap: 25px; }
-nav a { font-size: 1rem; font-weight: 500; color: var(--text-dark); }
+nav a { font-size: 1rem; font-weight: 500; color: var(--text-dark); position: relative; }
 nav a:hover { color: var(--accent-color); }
+nav a.active-link { color: var(--primary-color); font-weight: bold; }
 
 /* --- SLIDER --- */
 .slider-container {
     position: relative;
     width: 100%;
-    height: 900px;
+    /* Height is controlled by Snap Section now, but defaults here */
+    height: 100%; 
     overflow: hidden;
     background-color: #000;
 }
@@ -88,30 +94,59 @@ nav a:hover { color: var(--accent-color); }
     color: white;
     text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
     z-index: 10;
+    transition: all 0.5s ease;
 }
 
 .slide-overlay h2 { font-size: 3rem; margin-bottom: 10px; }
 
-/* --- FOUR CIRCLES --- */
-.services-preview {
-    background-color: #f1f5f9;
-    padding: 4rem 2rem;
+/* Slider Info Text (Appears on scroll away) */
+.slider-info {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
     text-align: center;
+    width: 80%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    z-index: 20;
 }
 
-.services-preview h2 {
+/* --- FOUR CIRCLES / MARQUEE --- */
+.marquee-section {
+    width: 100%;
+    height: 100%; /* Fills the snap section */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8fafc;
+}
+
+.marquee-section h2 {
     font-size: 2rem;
     color: var(--primary-color);
     margin-bottom: 3rem;
     text-transform: uppercase;
     letter-spacing: 2px;
+    text-align: center;
 }
 
-.circles-container {
+.marquee-container {
     display: flex;
-    justify-content: center;
-    gap: 3rem;
-    flex-wrap: wrap;
+    width: fit-content;
+    animation: scroll-left 25s linear infinite;
+}
+
+@keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.marquee-item {
+    margin: 0 2rem;
+    transition: transform 0.3s;
 }
 
 .circle-item {
@@ -120,10 +155,7 @@ nav a:hover { color: var(--accent-color); }
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: transform 0.3s ease;
 }
-
-.circle-item:hover { transform: translateY(-10px); }
 
 .circle-visual {
     width: 250px;
@@ -137,7 +169,7 @@ nav a:hover { color: var(--accent-color); }
     transition: border-color 0.3s;
 }
 
-.circle-item:hover .circle-visual { border-color: var(--accent-color); }
+.marquee-item:hover .circle-visual { border-color: var(--accent-color); transform: scale(1.1); }
 
 .circle-visual img {
     width: 100%; height: 100%;
@@ -151,7 +183,14 @@ nav a:hover { color: var(--accent-color); }
 }
 
 /* --- VISION & MISSION --- */
-.split-section { display: flex; flex-wrap: wrap; width: 100%; }
+.split-section { 
+    display: flex; 
+    flex-wrap: wrap; 
+    width: 100%; 
+    height: 100%; /* Fill the section */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+}
 
 .split-half {
     flex: 1;
@@ -165,7 +204,6 @@ nav a:hover { color: var(--accent-color); }
 .vision-section { 
     background-color: var(--bg-light); 
     color: var(--text-dark); 
-    border-right: 1px solid #eee; 
 }
 
 .mission-section { 
@@ -201,9 +239,9 @@ footer {
 
 @media (max-width: 768px) {
     .header-container { flex-direction: column; gap: 1rem; }
-    .slider-container { height: 400px; }
-    .circles-container { gap: 2rem; }
+    .slide-overlay h2 { font-size: 2rem; }
     .circle-visual { width: 140px; height: 140px; }
+    .marquee-container { animation-duration: 15s; } /* Faster scroll on mobile */
 }
 
 /* ============================================================
@@ -270,7 +308,6 @@ footer {
 .team-card:nth-child(4) { animation-delay: 0.8s; }
 .team-card:nth-child(5) { animation-delay: 0.9s; }
 
-/* IMAGE STYLING */
 .team-card img {
     width: 100%;
     height: 280px;
@@ -280,7 +317,6 @@ footer {
     display: block;
 }
 
-/* NAME BOX (Default State) */
 .team-name-box {
     padding: 1.5rem;
     background: white;
@@ -304,7 +340,6 @@ footer {
     margin-top: 5px;
 }
 
-/* PROFILE DETAILS (Hidden by default) */
 .profile-details {
     max-height: 0;
     overflow: hidden;
@@ -367,12 +402,8 @@ footer {
     overflow: visible;
 }
 
-/* Hide the bottom name box when active */
-.team-card.active .team-name-box {
-    display: none;
-}
+.team-card.active .team-name-box { display: none; }
 
-/* LEFT SIDE: The Image */
 .team-card.active img {
     width: 45%;
     height: 450px;
@@ -383,7 +414,6 @@ footer {
     margin: 0;
 }
 
-/* RIGHT SIDE: The Details Text */
 .team-card.active .profile-details {
     max-height: 600px;
     opacity: 1;
@@ -397,7 +427,6 @@ footer {
     margin: 0;
 }
 
-/* Mobile Adjustment for Active Card */
 @media (max-width: 768px) {
     .team-card.active {
         flex-direction: column;
@@ -415,7 +444,6 @@ footer {
     }
 }
 
-/* Close Button */
 .close-btn {
     position: absolute;
     top: -20px;
@@ -494,112 +522,56 @@ footer {
 @keyframes popIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
 @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0px); } }
 
+
 /* ============================================================
-   INDEX PAGE ANIMATIONS & EFFECTS
+   FULL PAGE SCROLL (SNAP SCROLLING) - NEW ADDITION
    ============================================================ */
 
-/* 1. SLIDER SHRINK EFFECT */
-.slider-container {
-    transition: height 0.5s ease-in-out, transform 0.5s ease;
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden; /* Hide default scrollbar, handle in container */
 }
 
-/* When we scroll down, add this class via JS */
-.slider-container.shrink {
-    height: 50vh !important; /* Reduces to half screen */
-    position: relative; /* Allows content to scroll over it */
+.snap-container {
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory; /* Forces snap effect */
+    scroll-behavior: smooth;
 }
 
-/* The Main Text (Hides when scrolled) */
-.slider-container.shrink .slide-overlay h2,
-.slider-container.shrink .slide-overlay p {
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: all 0.5s ease;
-}
-
-/* The Hidden Info Text (Shows when scrolled) */
-.slider-info {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    width: 80%;
-    opacity: 0;
-    transition: opacity 0.5s ease 0.3s; /* Delay appearance */
-    pointer-events: none;
-    z-index: 20;
-}
-
-.slider-container.shrink .slider-info {
-    opacity: 1;
-}
-
-.slider-info h3 {
-    color: white;
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.8);
-}
-.slider-info p {
-    color: #ddd;
-    font-size: 0.9rem;
-}
-
-/* 2. INFINITE MARQUEE (Moving Circles) */
-.marquee-section {
-    background: #f8fafc;
-    padding: 3rem 0;
-    overflow: hidden; /* Hides the scrollbar */
+/* Every main section becomes a "Full Page" */
+.snap-section {
+    height: 100vh; /* Forces full screen height */
+    width: 100%;
+    scroll-snap-align: start; /* Snaps to the top */
     position: relative;
-}
-
-.marquee-section h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: var(--primary-color);
-    text-transform: uppercase;
-}
-
-.marquee-container {
     display: flex;
-    width: fit-content;
-    animation: scroll-left 25s linear infinite;
+    flex-direction: column;
+    justify-content: center; /* Centers content vertically */
+    align-items: center;     /* Centers content horizontally */
+    overflow: hidden;
 }
 
-.marquee-item {
-    margin: 0 2rem;
-    transition: transform 0.3s;
+/* Specific Section Overrides for Layout */
+#section-slider .slider-container {
+    height: 100vh !important; /* Force full height */
 }
 
-.marquee-item:hover {
-    transform: scale(1.1) !important; /* Pause effect via JS or just scale */
-    animation-play-state: paused; /* Requires JS or inline style to work perfectly, simplifying here */
+#section-vision .split-section {
+    height: 100%; /* Ensure split fills the section */
 }
 
-/* The actual scrolling animation */
-@keyframes scroll-left {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); } /* Move half the total width (since we duplicate content) */
-}
-
-/* 3. SCROLL REVEAL ANIMATIONS (Zoom In/Out) */
+/* Reveal Animation for Zoom In Effect */
 .reveal-section {
     opacity: 0;
-    transform: scale(0.9) translateY(30px); /* Start smaller and lower */
-    transition: all 1s ease-out;
+    transform: scale(0.9) translateY(30px);
+    transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* When this class is added by JS */
 .reveal-section.active {
     opacity: 1;
-    transform: scale(1) translateY(0); /* Zoom in to normal size */
-}
-
-/* Stagger children (Vision/Mission) */
-.reveal-section.active .split-half {
-    opacity: 1;
-    transform: scale(1);
+    transform: scale(1) translateY(0);
 }
 
 .split-half {
@@ -607,14 +579,10 @@ footer {
     transform: translateY(50px);
     transition: all 0.8s ease-out;
 }
-
-/* Stagger delay for right side */
 .split-half:nth-child(2) { transition-delay: 0.2s; }
 
-/* 4. HEADER SCROLL EFFECT */
-header.scrolled {
-    padding: 0.5rem 0;
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+/* When active section, show children */
+.reveal-section.active .split-half {
+    opacity: 1;
+    transform: translateY(0);
 }
