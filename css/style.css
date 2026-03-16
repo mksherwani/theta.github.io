@@ -493,3 +493,128 @@ footer {
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes popIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
 @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0px); } }
+
+/* ============================================================
+   INDEX PAGE ANIMATIONS & EFFECTS
+   ============================================================ */
+
+/* 1. SLIDER SHRINK EFFECT */
+.slider-container {
+    transition: height 0.5s ease-in-out, transform 0.5s ease;
+}
+
+/* When we scroll down, add this class via JS */
+.slider-container.shrink {
+    height: 50vh !important; /* Reduces to half screen */
+    position: relative; /* Allows content to scroll over it */
+}
+
+/* The Main Text (Hides when scrolled) */
+.slider-container.shrink .slide-overlay h2,
+.slider-container.shrink .slide-overlay p {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.5s ease;
+}
+
+/* The Hidden Info Text (Shows when scrolled) */
+.slider-info {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 80%;
+    opacity: 0;
+    transition: opacity 0.5s ease 0.3s; /* Delay appearance */
+    pointer-events: none;
+    z-index: 20;
+}
+
+.slider-container.shrink .slider-info {
+    opacity: 1;
+}
+
+.slider-info h3 {
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+}
+.slider-info p {
+    color: #ddd;
+    font-size: 0.9rem;
+}
+
+/* 2. INFINITE MARQUEE (Moving Circles) */
+.marquee-section {
+    background: #f8fafc;
+    padding: 3rem 0;
+    overflow: hidden; /* Hides the scrollbar */
+    position: relative;
+}
+
+.marquee-section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+    text-transform: uppercase;
+}
+
+.marquee-container {
+    display: flex;
+    width: fit-content;
+    animation: scroll-left 25s linear infinite;
+}
+
+.marquee-item {
+    margin: 0 2rem;
+    transition: transform 0.3s;
+}
+
+.marquee-item:hover {
+    transform: scale(1.1) !important; /* Pause effect via JS or just scale */
+    animation-play-state: paused; /* Requires JS or inline style to work perfectly, simplifying here */
+}
+
+/* The actual scrolling animation */
+@keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* Move half the total width (since we duplicate content) */
+}
+
+/* 3. SCROLL REVEAL ANIMATIONS (Zoom In/Out) */
+.reveal-section {
+    opacity: 0;
+    transform: scale(0.9) translateY(30px); /* Start smaller and lower */
+    transition: all 1s ease-out;
+}
+
+/* When this class is added by JS */
+.reveal-section.active {
+    opacity: 1;
+    transform: scale(1) translateY(0); /* Zoom in to normal size */
+}
+
+/* Stagger children (Vision/Mission) */
+.reveal-section.active .split-half {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.split-half {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease-out;
+}
+
+/* Stagger delay for right side */
+.split-half:nth-child(2) { transition-delay: 0.2s; }
+
+/* 4. HEADER SCROLL EFFECT */
+header.scrolled {
+    padding: 0.5rem 0;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
