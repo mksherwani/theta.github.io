@@ -4,14 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Theta Solutions</title>
-    
-    <!-- THIS LINKS TO YOUR MASTER CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
     <!-- HEADER -->
-    <header>
+    <header id="main-header">
         <div class="header-container">
             <div class="brand-area">
                 <div class="logo-icon">Θ</div>
@@ -20,12 +18,12 @@
             
             <nav>
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="About-us.html">About Us</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Portfolio</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="index.html" class="active-link">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
                 </ul>
             </nav>
         </div>
@@ -34,11 +32,17 @@
     <!-- MAIN CONTENT -->
     <main>
         
-        <!-- 1. SLIDER -->
+        <!-- 1. FULL SCREEN SLIDER (Shrinks on scroll) -->
         <section class="slider-container" id="home-slider">
             <div class="slide-overlay">
                 <h2>Innovating the Future</h2>
                 <p>Theta Solutions delivers excellence.</p>
+            </div>
+
+            <!-- Hidden Info Text (Appears when scrolled) -->
+            <div class="slider-info">
+                <h3>Driving Digital Transformation</h3>
+                <p>We specialize in AI, Software Development, and IT Deployment for the modern enterprise.</p>
             </div>
 
             <div class="slide active" style="background-image: url('https://picsum.photos/seed/tech1/1920/1080');"></div>
@@ -48,60 +52,92 @@
             <div class="slide" style="background-image: url('https://picsum.photos/seed/tech5/1920/1080');"></div>
         </section>
 
-        <!-- 2. FOUR CIRCLES -->
-        <section class="services-preview">
-            <h2>Our Expertise</h2>
+        <!-- 2. INFINITE SCROLLING SERVICES (Marquee) -->
+        <section class="marquee-section">
+            <h2>Our Core Expertise</h2>
             
-            <div class="circles-container">
+            <!-- Marquee Container -->
+            <div class="marquee-container">
                 
-                <a href="#" class="circle-item">
+                <!-- SET 1 (Original) -->
+                <a href="it-support.html" class="marquee-item circle-item">
                     <div class="circle-visual">
                         <img src="https://picsum.photos/seed/support/300/300" alt="IT Support">
                     </div>
                     <div class="circle-title">IT Support</div>
                 </a>
 
-                <a href="#" class="circle-item">
+                <a href="it-deployment.html" class="marquee-item circle-item">
                     <div class="circle-visual">
                         <img src="https://picsum.photos/seed/server/300/300" alt="IT Deployment">
                     </div>
                     <div class="circle-title">IT Deployment</div>
                 </a>
 
-                <a href="#" class="circle-item">
+                <a href="software-dev.html" class="marquee-item circle-item">
                     <div class="circle-visual">
                         <img src="https://picsum.photos/seed/code/300/300" alt="Software Development">
                     </div>
                     <div class="circle-title">Software Dev</div>
                 </a>
 
-                <a href="#" class="circle-item">
+                <a href="ai-tools.html" class="marquee-item circle-item">
                     <div class="circle-visual">
                         <img src="https://picsum.photos/seed/ai/300/300" alt="AI Tools">
                     </div>
                     <div class="circle-title">AI Tools Dev</div>
                 </a>
 
+                <!-- SET 2 (Duplicate for seamless loop) -->
+                <a href="it-support.html" class="marquee-item circle-item">
+                    <div class="circle-visual">
+                        <img src="https://picsum.photos/seed/support/300/300" alt="IT Support">
+                    </div>
+                    <div class="circle-title">IT Support</div>
+                </a>
+
+                <a href="it-deployment.html" class="marquee-item circle-item">
+                    <div class="circle-visual">
+                        <img src="https://picsum.photos/seed/server/300/300" alt="IT Deployment">
+                    </div>
+                    <div class="circle-title">IT Deployment</div>
+                </a>
+
+                <a href="software-dev.html" class="marquee-item circle-item">
+                    <div class="circle-visual">
+                        <img src="https://picsum.photos/seed/code/300/300" alt="Software Development">
+                    </div>
+                    <div class="circle-title">Software Dev</div>
+                </a>
+
+                <a href="ai-tools.html" class="marquee-item circle-item">
+                    <div class="circle-visual">
+                        <img src="https://picsum.photos/seed/ai/300/300" alt="AI Tools">
+                    </div>
+                    <div class="circle-title">AI Tools Dev</div>
+                </a>
+                
             </div>
         </section>
 
-        <!-- 3. VISION AND MISSION -->
-        <section class="split-section">
+        <!-- 3. VISION AND MISSION (Zoom In on Scroll) -->
+        <!-- Added 'reveal-section' class for the animation -->
+        <section class="split-section reveal-section">
             
             <div class="split-half vision-section">
                 <h2 class="section-title">Our Vision</h2>
                 <div class="section-content">
-                    <p>At Theta Solutions, we envision a world where technology seamlessly integrates with human potential. We strive to be the leading catalyst for digital transformation.</p>
+                    <p>At Theta Solutions, we envision a world where technology seamlessly integrates with human potential. We strive to be the leading catalyst for digital transformation, empowering businesses to reach new heights.</p>
                 </div>
-                <a href="#" class="cta-button" style="color: #fff;">Learn More</a>
+                <a href="about.html" class="cta-button" style="color: #fff;">Learn More</a>
             </div>
 
             <div class="split-half mission-section">
                 <h2 class="section-title">Our Mission</h2>
                 <div class="section-content">
-                    <p>Our mission is to provide cutting-edge software solutions that solve complex challenges. We are dedicated to delivering exceptional value to our clients through robust engineering.</p>
+                    <p>Our mission is to provide cutting-edge software solutions that solve complex challenges. We are dedicated to delivering exceptional value to our clients through robust engineering and user-centric design.</p>
                 </div>
-                <a href="#" class="cta-button">Get in Touch</a>
+                <a href="contact.html" class="cta-button">Get in Touch</a>
             </div>
 
         </section>
@@ -113,8 +149,44 @@
         <p>&copy; 2023 Theta Solutions. All rights reserved.</p>
     </footer>
 
-    <!-- THIS LINKS TO YOUR MASTER JS -->
+    <!-- JAVASCRIPT -->
     <script src="js/main.js"></script>
+    
+    <!-- INDEX PAGE SPECIFIC SCRIPTS -->
+    <script>
+        // 1. SLIDER SHRINK & HEADER SCROLL EFFECT
+        window.addEventListener('scroll', () => {
+            const slider = document.getElementById('home-slider');
+            const header = document.getElementById('main-header');
+            
+            if (window.scrollY > 50) {
+                slider.classList.add('shrink');
+                header.classList.add('scrolled');
+            } else {
+                slider.classList.remove('shrink');
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // 2. SCROLL REVEAL ANIMATION (ZOOM IN EFFECT)
+        const revealElements = document.querySelectorAll('.reveal-section');
+
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const elementVisible = 150;
+
+            revealElements.forEach((reveal) => {
+                const elementTop = reveal.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        // Trigger once on load
+        revealOnScroll();
+    </script>
 
 </body>
 </html>
