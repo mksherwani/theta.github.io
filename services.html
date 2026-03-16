@@ -56,11 +56,20 @@
 
         /* --- HEADER --- */
         header {
-            position: fixed; top: 0; left: 0; width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
             padding: 1rem 2rem;
-            display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000;
-            background: rgba(15, 23, 42, 0.9);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            
+            /* FIX: Increase z-index significantly to ensure it is above the slider */
+            z-index: 9999; 
+            
+            /* Ensure background is solid enough to be seen, or blur works correctly */
+            background: rgba(15, 23, 42, 0.95); 
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
@@ -80,7 +89,9 @@
             text-transform: uppercase;
         }
 
-        nav { z-index: 1001; }
+        nav { 
+            z-index: 10000; /* Higher than header just in case */
+        }
         nav ul { display: flex; gap: 25px; list-style: none; }
         nav a {
             font-size: 0.9rem; font-weight: 500; color: #cbd5e1;
