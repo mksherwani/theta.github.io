@@ -46,8 +46,7 @@
         .cursor-dot, .cursor-outline {
             position: fixed; top: 0; left: 0;
             transform: translate(-50%, -50%);
-            border-radius: 50%; z-index: 10001; /* Higher z-index to ensure visibility */
-            pointer-events: none;
+            border-radius: 50%; z-index: 10001; pointer-events: none;
         }
         .cursor-dot { width: 8px; height: 8px; background-color: var(--text-color); }
         .cursor-outline { width: 40px; height: 40px; border: 1px solid var(--text-color); transition: width 0.2s, height 0.2s, background-color 0.2s; }
@@ -55,20 +54,20 @@
             width: 60px; height: 60px; background-color: rgba(255, 255, 255, 0.1); border-color: transparent;
         }
 
-        /* --- HEADER (FIXED & VISIBLE) --- */
+        /* --- HEADER --- */
         header {
             position: fixed; top: 0; left: 0; width: 100%;
             padding: 1rem 2rem;
             display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000; /* High z-index */
-            background: rgba(15, 23, 42, 0.9); /* Solid background for visibility */
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.9);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .brand-area {
             display: flex; align-items: center; gap: 12px;
-            z-index: 1001; /* Ensure brand is clickable */
+            z-index: 1001;
         }
 
         .logo-icon {
@@ -84,7 +83,7 @@
         nav { z-index: 1001; }
         nav ul { display: flex; gap: 25px; list-style: none; }
         nav a {
-            font-size: 0.9rem; font-weight: 500; color: #cbd5e1; /* Lighter grey for readability */
+            font-size: 0.9rem; font-weight: 500; color: #cbd5e1;
             text-transform: uppercase; letter-spacing: 1px; text-decoration: none;
             transition: color 0.3s;
             position: relative;
@@ -117,7 +116,7 @@
             object-fit: cover;
             opacity: 0;
             transition: opacity 1s ease-in-out;
-            filter: brightness(0.5); /* Darker to make text pop */
+            filter: brightness(0.4); /* Darker to make text pop */
         }
         .hero-slide.active { opacity: 1; }
 
@@ -129,7 +128,7 @@
             position: relative; z-index: 2;
         }
 
-        /* --- TEXT SECTIONS WITH PARALLAX --- */
+        /* --- TEXT SECTIONS --- */
         .section {
             min-height: 80vh;
             padding: 10vh 5vw;
@@ -138,7 +137,7 @@
             justify-content: center;
             border-top: 1px solid rgba(255,255,255,0.05);
             position: relative;
-            overflow: hidden; /* Keeps parallax inside */
+            overflow: hidden;
         }
 
         .section-title {
@@ -149,18 +148,11 @@
             color: var(--accent-color);
         }
 
-        /* The Parallax Wrapper */
-        .parallax-text-wrapper {
-            transform: translateY(0); /* JS will update this */
-            will-change: transform; /* Performance optimization */
-        }
-
         .big-text {
             font-size: clamp(2rem, 4vw, 3.5rem);
             font-weight: 300;
             line-height: 1.3;
             max-width: 800px;
-            margin-bottom: 2rem;
         }
 
         /* --- MARQUEE --- */
@@ -196,20 +188,12 @@
             height: 350px;
             border-radius: 8px;
             cursor: pointer;
-            transform: translateY(50px); /* Start lower for reveal */
-            opacity: 0;
-            transition: all 0.8s ease-out;
-        }
-
-        .service-card.visible {
-            transform: translateY(0);
-            opacity: 1;
         }
 
         .service-card img {
             width: 100%; height: 100%;
             object-fit: cover;
-            transition: transform 0.6s ease;
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
             filter: grayscale(100%);
         }
 
@@ -223,11 +207,12 @@
             padding: 2rem;
             background: linear-gradient(to top, rgba(15, 23, 42, 0.95), transparent);
             width: 100%;
+            opacity: 0;
             transform: translateY(20px);
-            transition: transform 0.4s ease;
+            transition: all 0.4s ease;
         }
 
-        .service-card:hover .service-info { transform: translateY(0); }
+        .service-card:hover .service-info { opacity: 1; transform: translateY(0); }
         .service-info h3 { color: var(--accent-color); font-size: 1.5rem; margin-bottom: 0.5rem; text-transform: uppercase; }
         .service-info p { color: #fff; font-size: 0.9rem; }
 
@@ -244,14 +229,6 @@
         .vm-block {
             flex: 1;
             min-width: 300px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-        
-        .vm-block.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         .vm-title {
@@ -271,6 +248,32 @@
             color: #cbd5e1;
         }
 
+        /* ============================================================
+           ANIMATIONS (TAKEN FROM REFERENCE CODE)
+           ============================================================ */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-100px);
+            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .active-reveal {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+
         /* Mobile Adjustments */
         @media (max-width: 768px) {
             .cursor-dot, .cursor-outline { display: none; }
@@ -288,7 +291,7 @@
     <div class="cursor-dot" data-cursor-dot></div>
     <div class="cursor-outline" data-cursor-outline></div>
 
-    <!-- HEADER (Fixed & Visible) -->
+    <!-- HEADER -->
     <header>
         <div class="brand-area">
             <div class="logo-icon">Θ</div>
@@ -307,25 +310,27 @@
         </nav>
     </header>
 
-    <!-- HERO (Slideshow) -->
+    <!-- HERO (Slideshow with IT/Earth images) -->
     <header class="hero">
         <div class="hero-slider">
-            <!-- 5 Images cycling -->
-            <img src="https://picsum.photos/seed/darktech/1920/1080" class="hero-slide active">
-            <img src="https://picsum.photos/seed/tech2/1920/1080" class="hero-slide">
-            <img src="https://picsum.photos/seed/tech3/1920/1080" class="hero-slide">
-            <img src="https://picsum.photos/seed/tech4/1920/1080" class="hero-slide">
-            <img src="https://picsum.photos/seed/tech5/1920/1080" class="hero-slide">
+            <!-- Updated seeds for IT/Network/Earth vibe -->
+            <img src="https://picsum.photos/seed/network/1920/1080" class="hero-slide active">
+            <img src="https://picsum.photos/seed/server/1920/1080" class="hero-slide">
+            <img src="https://picsum.photos/seed/data/1920/1080" class="hero-slide">
+            <img src="https://picsum.photos/seed/cyber/1920/1080" class="hero-slide">
+            <img src="https://picsum.photos/seed/globe/1920/1080" class="hero-slide">
         </div>
 
-        <div class="parallax-text-wrapper" data-speed="0.2">
+        <!-- Animation Class Applied -->
+        <div class="reveal-up">
             <h1>Digital<br>Innovation<br>Simplified.</h1>
         </div>
     </header>
 
-    <!-- PHILOSOPHY TEXT (With Parallax) -->
+    <!-- PHILOSOPHY TEXT -->
     <section class="section">
-        <div class="parallax-text-wrapper" data-speed="0.3">
+        <!-- Animation Class Applied -->
+        <div class="reveal-left">
             <h2 class="section-title">Philosophy</h2>
             <p class="big-text">
                 We craft the future.
@@ -349,13 +354,14 @@
 
     <!-- OUR SERVICES (4 Blocks) -->
     <section class="section">
-        <div class="parallax-text-wrapper" data-speed="0.1" style="width: 100%;">
+        <!-- Animation Class Applied -->
+        <div class="reveal-up" style="width: 100%;">
             <h2 class="section-title">Our Services</h2>
         </div>
         
         <div class="grid">
-            <!-- 1. IT Support -->
-            <div class="service-card">
+            <!-- Animation Classes Applied with Delays -->
+            <div class="service-card reveal-up">
                 <img src="https://picsum.photos/seed/support/600/800" alt="IT Support">
                 <div class="service-info">
                     <h3>IT Support</h3>
@@ -363,8 +369,7 @@
                 </div>
             </div>
 
-            <!-- 2. IT Deployment -->
-            <div class="service-card" style="transition-delay: 0.1s;">
+            <div class="service-card reveal-up" style="transition-delay: 0.2s;">
                 <img src="https://picsum.photos/seed/deploy/600/800" alt="IT Deployment">
                 <div class="service-info">
                     <h3>IT Deployment</h3>
@@ -372,8 +377,7 @@
                 </div>
             </div>
 
-            <!-- 3. Software Development -->
-            <div class="service-card" style="transition-delay: 0.2s;">
+            <div class="service-card reveal-up" style="transition-delay: 0.4s;">
                 <img src="https://picsum.photos/seed/code/600/800" alt="Software Development">
                 <div class="service-info">
                     <h3>Software Development</h3>
@@ -381,8 +385,7 @@
                 </div>
             </div>
 
-            <!-- 4. AI Tools Development -->
-            <div class="service-card" style="transition-delay: 0.3s;">
+            <div class="service-card reveal-up" style="transition-delay: 0.6s;">
                 <img src="https://picsum.photos/seed/ai/600/800" alt="AI Tools">
                 <div class="service-info">
                     <h3>AI Tools Development</h3>
@@ -394,26 +397,24 @@
 
     <!-- VISION & MISSION (Split Animation) -->
     <section class="section" style="background-color: #0b1120;">
-        <div class="parallax-text-wrapper" data-speed="0.2" style="width: 100%;">
-            <div class="vision-mission-container">
-                
-                <!-- Vision (Left) -->
-                <div class="vm-block">
-                    <div class="vm-title">Our Vision</div>
-                    <p class="vm-text">
-                        At Theta Solutions, we envision a world where technology seamlessly integrates with human potential. We strive to be the leading catalyst for digital transformation.
-                    </p>
-                </div>
-
-                <!-- Mission (Right) -->
-                <div class="vm-block" style="transition-delay: 0.2s;">
-                    <div class="vm-title">Our Mission</div>
-                    <p class="vm-text">
-                        Our mission is to provide cutting-edge software solutions that solve complex challenges. We are dedicated to delivering exceptional value to our clients through robust engineering.
-                    </p>
-                </div>
-
+        <div class="vision-mission-container">
+            
+            <!-- Animation Class Applied (Left) -->
+            <div class="vm-block reveal-left">
+                <div class="vm-title">Our Vision</div>
+                <p class="vm-text">
+                    At Theta Solutions, we envision a world where technology seamlessly integrates with human potential. We strive to be the leading catalyst for digital transformation.
+                </p>
             </div>
+
+            <!-- Animation Class Applied (Right) -->
+            <div class="vm-block reveal-right">
+                <div class="vm-title">Our Mission</div>
+                <p class="vm-text">
+                    Our mission is to provide cutting-edge software solutions that solve complex challenges. We are dedicated to delivering exceptional value to our clients through robust engineering.
+                </p>
+            </div>
+
         </div>
     </section>
 
@@ -433,36 +434,22 @@
             cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
         });
 
-        // 2. PARALLAX EFFECT (The "Moving by itself" effect)
-        const parallaxWrappers = document.querySelectorAll('.parallax-text-wrapper');
-
-        window.addEventListener('scroll', () => {
-            const scrollY = window.scrollY;
-            
-            parallaxWrappers.forEach(wrapper => {
-                const speed = wrapper.getAttribute('data-speed');
-                // Move text slower than scroll (downward movement)
-                wrapper.style.transform = `translateY(${scrollY * speed}px)`;
-            });
-        });
-
-        // 3. SCROLL REVEAL (For cards and blocks)
-        const revealElements = document.querySelectorAll('.service-card, .vm-block');
-
+        // 2. SCROLL REVEAL ANIMATIONS (From Reference Code)
+        const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
         const revealOnScroll = () => {
             const windowHeight = window.innerHeight; const elementVisible = 100;
-            revealElements.forEach((el) => {
-                const elementTop = el.getBoundingClientRect().top;
-                if (elementTop < windowHeight - elementVisible) el.classList.add('visible');
+            revealElements.forEach((reveal) => {
+                const elementTop = reveal.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) reveal.classList.add('active-reveal');
             });
         };
         window.addEventListener('scroll', revealOnScroll);
-        revealOnScroll();
+        revealOnScroll(); // Trigger once on load
 
-        // 4. HERO SLIDESHOW
+        // 3. HERO SLIDESHOW
         const slides = document.querySelectorAll('.hero-slide');
         let currentSlide = 0;
-        const slideInterval = 3000; 
+        const slideInterval = 3000; // Change every 3 seconds
 
         function nextSlide() {
             slides[currentSlide].classList.remove('active');
