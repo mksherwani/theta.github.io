@@ -54,21 +54,23 @@
             width: 60px; height: 60px; background-color: rgba(255, 255, 255, 0.1); border-color: transparent;
         }
 
-        /* --- HEADER (FIXED VISIBILITY) --- */
-        header {
-            position: fixed;
+        /* --- HEADER --- */
+
+        .main-header {
+            position: fixed; /* Sticks to top */
             top: 0;
             left: 0;
             width: 100%;
-            padding: 1rem 2rem;
+            padding: 1.5rem 2rem; /* Increased padding for visibility */
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 9999; /* Ensure it is on top */
             
-            /* FIX: Solid background instead of blur to prevent disappearing */
-            background: rgba(15, 23, 42, 0.95); 
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            /* CRITICAL FIXES */
+            z-index: 99999; /* Extremely high z-index */
+            background-color: #0f172a; /* Solid Opaque Color (no blur) */
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5); /* Strong shadow to lift it off page */
         }
 
         .brand-area {
@@ -300,7 +302,7 @@
     <div class="cursor-outline" data-cursor-outline></div>
 
     <!-- HEADER -->
-    <header>
+    <div class="main-header">
         <div class="brand-area">
             <div class="logo-icon">Θ</div>
             <div class="company-name">THETA SOLUTIONS</div>
@@ -316,7 +318,7 @@
                 <li><a href="#">Contact Us</a></li>
             </ul>
         </nav>
-    </header>
+    </div>
 
     <!-- HERO (Slideshow with SPECIFIC IT/Earth images) -->
     <header class="hero">
@@ -333,7 +335,7 @@
         <div class="reveal-up">
             <h1>Digital<br>Innovation<br>Simplified.</h1>
         </div>
-    </header>
+    </div>
 
     <!-- PHILOSOPHY TEXT -->
     <section class="section">
