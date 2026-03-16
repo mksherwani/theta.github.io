@@ -208,16 +208,15 @@ footer {
 }
 
 /* ============================================================
-   CORRECTED ADVANCED ABOUT PAGE STYLES 
-   (This replaces the old broken version)
+            ABOUT PAGE STYLES
    ============================================================ */
 
-/* 1. MAIN SECTION BACKGROUND */
+/* 1. HERO SECTION */
 .about-hero {
     background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
     padding: 5rem 2rem;
     text-align: center;
-    min-height: 100vh; /* Full screen height */
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -230,7 +229,7 @@ footer {
     margin-bottom: 1rem;
     text-transform: uppercase;
     letter-spacing: 3px;
-    opacity: 0; /* For animation entry */
+    opacity: 0;
     animation: fadeInDown 1s ease forwards;
 }
 
@@ -243,7 +242,7 @@ footer {
     animation: fadeInUp 1s ease 0.3s forwards;
 }
 
-/* 2. FOUNDERS GRID (3D Cards) */
+/* 2. TEAM GRID */
 .team-grid {
     display: flex;
     justify-content: center;
@@ -258,36 +257,38 @@ footer {
     width: 220px;
     background: white;
     border-radius: 20px;
-    overflow: hidden;
+    overflow: hidden; /* Keeps image inside corners */
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy effect */
-    transform-style: preserve-3d;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     opacity: 0;
     animation: popIn 0.6s ease forwards;
 }
 
-/* Staggered animation delay for cards */
+/* Staggered entry */
 .team-card:nth-child(1) { animation-delay: 0.5s; }
 .team-card:nth-child(2) { animation-delay: 0.6s; }
 .team-card:nth-child(3) { animation-delay: 0.7s; }
 .team-card:nth-child(4) { animation-delay: 0.8s; }
 .team-card:nth-child(5) { animation-delay: 0.9s; }
 
-/* Image Styling: Grayscale to Color */
+/* IMAGE STYLING */
 .team-card img {
     width: 100%;
     height: 280px;
     object-fit: cover;
-    filter: grayscale(100%); /* Start Black & White */
+    filter: grayscale(100%);
     transition: all 0.5s ease;
+    display: block; /* Removes bottom spacing */
 }
 
+/* NAME BOX (Default State) */
 .team-name-box {
     padding: 1.5rem;
     background: white;
     position: relative;
     z-index: 2;
+    transition: opacity 0.3s;
 }
 
 .team-name {
@@ -305,23 +306,33 @@ footer {
     margin-top: 5px;
 }
 
+/* PROFILE DETAILS (Hidden by default) */
+.profile-details {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    background: white;
+    padding: 0 2rem;
+    text-align: left;
+    transition: all 0.5s ease;
+}
+
 /* --- HOVER EFFECTS --- */
 .team-card:hover {
-    transform: translateY(-15px) scale(1.05); /* Lift up and grow */
-    box-shadow: 0 20px 40px rgba(56, 189, 248, 0.4); /* Blue Glow */
+    transform: translateY(-15px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(56, 189, 248, 0.4);
 }
-
 .team-card:hover img {
-    filter: grayscale(0%); /* Turn to color */
-    transform: scale(1.1); /* Zoom image slightly */
+    filter: grayscale(0%);
+    transform: scale(1.1);
 }
 
-/* --- ACTIVE / EXPANDED STATE (The Modal) --- */
+/* --- OVERLAY (The Background Blur) --- */
 .founders-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(15, 23, 42, 0.6); /* Darker, sleeker overlay */
-    backdrop-filter: blur(8px); /* Frosted glass effect on background */
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(8px);
     z-index: 900;
     opacity: 0;
     pointer-events: none;
@@ -336,44 +347,37 @@ footer {
     pointer-events: auto;
 }
 
-/* The Expanded Card */
+/* --- ACTIVE / CLICKED STATE --- */
 .team-card.active {
-    position: relative; /* Change from fixed to work with flex overlay */
+    position: relative; /* Key: Relative inside Flex container */
     width: 450px;
     height: auto;
     z-index: 1000;
-    transform: scale(1) !important;
+    transform: scale(1) !important; /* Reset hover scale */
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    cursor: default;
     pointer-events: auto;
-    animation: none; /* Stop entry animation */
     opacity: 1;
+    animation: none; /* Stop entry animation */
 }
 
+/* 1. Enlarge the Image */
 .team-card.active img {
     height: 350px;
     filter: grayscale(0%);
+    transform: none !important; /* Reset hover transform */
 }
 
-/* Hidden Details (Revealed on click) */
-.profile-details {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    background: rgba(255, 255, 255, 0.95);
-    transition: all 0.5s ease;
-    padding: 0 2rem;
-    text-align: left;
+/* 2. Hide the small Name Box */
+.team-card.active .team-name-box {
+    display: none;
 }
 
+/* 3. Show the Details Text */
 .team-card.active .profile-details {
-    max-height: 500px;
+    max-height: 500px; /* Expand to fit content */
     opacity: 1;
     padding: 2rem;
-    border-top: 1px solid #eee;
-}
-
-.team-card.active .team-name-box {
-    display: none; /* Hide the small info box when expanded */
 }
 
 .profile-details h3 {
@@ -399,25 +403,30 @@ footer {
     font-size: 1rem;
 }
 
+/* Close Button */
 .close-btn {
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: -20px;
+    right: -20px;
     background: white;
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
-    width: 40px; height: 40px;
+    width: 45px; height: 45px;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    z-index: 1001;
-    transition: transform 0.3s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 1002;
+    transition: transform 0.3s, background 0.3s;
+    color: #333;
 }
-.close-btn:hover { transform: rotate(90deg); background: var(--accent-color); }
+.close-btn:hover { 
+    transform: rotate(90deg); 
+    background: var(--accent-color); 
+    color: white; 
+}
 
-
-/* 3. CORE MEMBERS (Floating Circles) */
+/* --- CORE MEMBERS --- */
 .core-section {
     background: white;
     padding: 5rem 2rem;
@@ -425,8 +434,6 @@ footer {
     position: relative;
     overflow: hidden;
 }
-
-/* Decorative background circle */
 .core-section::before {
     content: '';
     position: absolute;
@@ -436,7 +443,6 @@ footer {
     transform: translate(-50%, -50%);
     z-index: 0;
 }
-
 .core-section h2 {
     font-size: 2rem;
     color: var(--primary-color);
@@ -444,7 +450,6 @@ footer {
     position: relative;
     z-index: 2;
 }
-
 .core-grid {
     display: flex;
     justify-content: center;
@@ -452,57 +457,27 @@ footer {
     position: relative;
     z-index: 2;
 }
-
 .core-card {
     animation: float 6s ease-in-out infinite;
 }
-
-.core-card:nth-child(2) { animation-delay: 3s; } /* Offset the float */
-
+.core-card:nth-child(2) { animation-delay: 3s; }
 .core-card img {
-    width: 200px;
-    height: 200px;
+    width: 200px; height: 200px;
     border-radius: 50%;
     object-fit: cover;
     border: 5px solid white;
     box-shadow: 0 15px 35px rgba(0,0,0,0.15);
     transition: all 0.4s ease;
 }
-
 .core-card:hover img {
     transform: scale(1.15) rotate(5deg);
     border-color: var(--accent-color);
 }
-
-.core-name {
-    margin-top: 1.5rem;
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--primary-color);
-}
-
-.core-role {
-    color: var(--accent-color);
-    font-weight: 600;
-    font-size: 0.95rem;
-    margin-top: 5px;
-}
+.core-name { margin-top: 1.5rem; font-size: 1.3rem; font-weight: 700; color: var(--primary-color); }
+.core-role { color: var(--accent-color); font-weight: 600; font-size: 0.95rem; margin-top: 5px; }
 
 /* --- ANIMATIONS --- */
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-@keyframes popIn {
-    from { opacity: 0; transform: scale(0.8); }
-    to { opacity: 1; transform: scale(1); }
-}
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
-    100% { transform: translateY(0px); }
-}
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes popIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+@keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0px); } }
